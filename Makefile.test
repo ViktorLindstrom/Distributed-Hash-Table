@@ -1,0 +1,26 @@
+# Compiler and flags
+CC := gcc
+CFLAGS := -Wall -O2 -Iresources/Hashtable -Iresources
+LDFLAGS := 
+
+# Directories
+HASH_TABLE_DIR := resources/Hashtable
+TEST_DIR := src
+
+# Sources
+TEST_SRCS := $(wildcard $(TEST_DIR)/*.c)  $(wildcard $(HASH_TABLE_DIR)/*.c) 
+TEST_TARGET := test_exe
+
+# Rules
+all: $(TEST_TARGET)
+
+$(TEST_TARGET): $(TEST_SRCS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+clean:
+	rm -rf $(TEST_TARGET)
+
+run_test: $(TEST_TARGET)
+	./$(TEST_TARGET)
+
+.PHONY: all clean run_test
